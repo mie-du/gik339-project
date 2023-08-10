@@ -21,7 +21,7 @@
         <form id="userForm">
           <div class="form-control my-4 mx-auto flex w-3/4 items-center">
             <label for="firstName" class="mr-4 text-xl w-40">Förnamn</label>
-            <input class="text-slate-800 p-1 flex-1 rounded-md" type="text" name="lastName" />
+            <input class="text-slate-800 p-1 flex-1 rounded-md" type="text" name="firstName" />
           </div>
           <div class="form-control my-4 mx-auto flex w-3/4 items-center">
             <label for="lastName" class="mr-4 text-xl w-40">Efternamn</label>
@@ -56,6 +56,21 @@
             </button>
           </div>
         </form>
+      </div>
+      <div id="listContainer">
+        <ul class="w-3/4 my-3 mx-auto flex flex-wrap gap-2 justify-center">
+          <li class="bg-green-200 basis-1/4 text-green-900 p-2 rounded-md border-2 border-green-400">
+            <h3>Förnamn Efternamn</h3>
+            <p>Användarnamn:</p>
+            <button
+              class="rounded-md bg-white/75 p-1 text-sm"
+              <button
+              class="border border-green-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2"
+              onclick="setCurrentUser(1)">
+              Ändra
+            </button>
+          </li>
+        </ul>
       </div>
     </main>
 
