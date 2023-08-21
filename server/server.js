@@ -8,9 +8,9 @@ server
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
   .use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Controll-Allow-Origin', '*');
+    res.header('Access-Controll-Allow-Headers', '*');
+    res.header('Access-Controll-Allow-Methods', '*');
 
     next();
   });
