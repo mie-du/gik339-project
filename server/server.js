@@ -30,3 +30,17 @@ server.get('/users', (req, res) => {
     }
   });
 });
+
+server.post('/users', (req, res) => {
+  const user = req.body;
+  const sql = `INSERT INTO users(firstName, lastName, username, color) VALUES (?,?,?,?)`;
+
+  db.run(sql, Object.values(user), (err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.send('Användaren sparades');
+    }
+  });
+});

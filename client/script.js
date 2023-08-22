@@ -35,3 +35,32 @@ function fetchData() {
       }
     });
 }
+
+userForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const serverUserObject = {
+    firstName: '',
+    lastName: '',
+    username: '',
+    color: ''
+  };
+  serverUserObject.firstName = userForm.firstName.value;
+  serverUserObject.lastName = userForm.lastName.value;
+  serverUserObject.username = userForm.username.value;
+  serverUserObject.color = userForm.color.value;
+
+  const request = new Request(url, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(serverUserObject)
+  });
+
+  fetch(request).then((response) => {
+    fetchData();
+    userForm.reset();
+  });
+}
