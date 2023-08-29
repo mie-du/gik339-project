@@ -18,10 +18,10 @@ function fetchData() {
             <button
               class="rounded-md bg-white/50 p-1 text-sm"
               <button
-              class="border border-${user.color}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2">
+              class="border border-${user.color}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2" onclick="setCurrentUser(${user.id})">
               Ändra
             </button>
-            <button class="border border-${user.color}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2">
+            <button class="border border-${user.color}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2" onclick="deleteUser(${user.id})">
               Ta bort
             </button>
           </div>
@@ -34,6 +34,27 @@ function fetchData() {
         listContainer.insertAdjacentHTML('beforeend', html);
       }
     });
+}
+
+function setCurrentUser(id) {
+  console.log('current', id);
+
+  fetch(`${url}/${id}`)
+    .then((result) => result.json())
+    .then((user) => {
+      console.log(user);
+      userForm.firstName.value = user.firstName;
+      userForm.lastName.value = user.lastName;
+      userForm.color.value = user.color;
+      userForm.username.value = user.username;
+
+      localStorage.setItem('currentId', user.id);
+    });
+}
+
+function deleteUser(id) {
+  console.log('delete', id);
+  fetch(`${url}/${id}`, { method: 'DELETE' }).then((result) => fetchData());
 }
 
 userForm.addEventListener('submit', handleSubmit);
@@ -51,8 +72,13 @@ function handleSubmit(e) {
   serverUserObject.username = userForm.username.value;
   serverUserObject.color = userForm.color.value;
 
+  const id = localStorage.getItem('currentId');
+  if (id) {
+    serverUserObject.id = id;
+  }
+
   const request = new Request(url, {
-    method: 'POST',
+    method: serverUserObject.id ? 'PUT' : 'POST',
     headers: {
       'content-type': 'application/json'
     },
@@ -61,6 +87,8 @@ function handleSubmit(e) {
 
   fetch(request).then((response) => {
     fetchData();
+
+    localStorage.removeItem('currentId');
     userForm.reset();
   });
 }
