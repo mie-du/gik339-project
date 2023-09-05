@@ -16,9 +16,9 @@ server
   .use(express.urlencoded({ extended: false }))
   .use((req, res, next) => {
     /* Headers för alla förfrågningar. Hanterar regler för CORS (vilka klienter som får anropa vår server och hur.) */
-    res.header('Access-Controll-Allow-Origin', '*');
-    res.header('Access-Controll-Allow-Headers', '*');
-    res.header('Access-Controll-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', '*');
     /* Säger åt servern att fortsätta processa förfrågan */
     next();
   });
