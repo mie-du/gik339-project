@@ -16,8 +16,6 @@ function fetchData() {
           <p>Användarnamn: ${user.username}</p>
           <div>
             <button
-              class="rounded-md bg-white/50 p-1 text-sm"
-              <button
               class="border border-${user.color}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2" onclick="setCurrentUser(${user.id})">
               Ändra
             </button>
